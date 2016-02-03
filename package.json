@@ -22,13 +22,14 @@
   },
   "homepage": "https://github.com/christkv/require_optional",
   "dependencies": {
-    "semver": "^5.1.0"
+    "semver": "^5.1.0",
+    "resolve-from": "^2.0.0"
   },
   "devDependencies": {
-    "mocha": "^2.4.5",
-    "es6-promise": "^3.0.2",
+    "bson": "0.4.21",
     "co": "4.6.0",
-    "bson": "0.4.21"
+    "es6-promise": "^3.0.2",
+    "mocha": "^2.4.5"
   },
   "peerOptionalDependencies": {
     "co": ">=5.6.0",
