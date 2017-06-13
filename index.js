@@ -25,7 +25,7 @@ var find_package_json = function(location) {
 
 // Find the package.json object of the module closest up the module call tree that contains name in that module's peerOptionalDependencies
 var find_package_json_with_name = function(name) {
-  // Walk the module call tree until we find a module containing name in its peerOptionalDependencies
+  // Walk up the module call tree until we find a module containing name in its peerOptionalDependencies
   var currentModule = module;
   var found = false;
   while (currentModule) {
@@ -101,7 +101,6 @@ var require_optional = function(name, options) {
 
   // Read the module file
   var dependentOnModule = JSON.parse(fs.readFileSync(f('%s/package.json', location)));
-  // console.log(dependentOnModule)
   // Get the version
   var version = dependentOnModule.version;
   // Validate if the found module satisfies the version id
