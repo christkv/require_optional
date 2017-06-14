@@ -1,6 +1,6 @@
 {
   "name": "require_optional",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Allows you declare optionalPeerDependencies that can be satisfied by the top level module but ignored if they are not.",
   "main": "index.js",
   "scripts": {
