@@ -23,11 +23,6 @@ var find_package_json = function(location) {
   return location;
 }
 
-// Get the parent module, or null if parent links itself
-var get_parent_module = function(module) {
-  return (module !== module.parent) ? module.parent : null;
-}
-
 // Find the package.json object of the module closest up the module call tree that contains name in that module's peerOptionalDependencies
 var find_package_json_with_name = function(name) {
   // Walk up the module call tree until we find a module containing name in its peerOptionalDependencies
@@ -36,9 +31,16 @@ var find_package_json_with_name = function(name) {
   while (currentModule) {
     // Check currentModule has a package.json
     location = currentModule.filename;
+    
+    if (typeof location === 'string' && location.indexOf('.js') > 0) {
+      location = location.split('/')
+      location.pop();
+      location = location.join('/');
+    }
+    
     var location = find_package_json(location)
     if (!location) {
-      currentModule = get_parent_module(currentModule);
+      currentModule = currentModule.parent;
       continue;
     }
 
@@ -49,7 +51,7 @@ var find_package_json_with_name = function(name) {
 
     // Check whether this package.json contains peerOptionalDependencies containing the name we're searching for
     if (!object.peerOptionalDependencies || (object.peerOptionalDependencies && !object.peerOptionalDependencies[parts[0]])) {
-      currentModule = get_parent_module(currentModule);
+      currentModule = currentModule.parent;
       continue;
     }
     found = true;
