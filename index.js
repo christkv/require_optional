@@ -36,6 +36,13 @@ var find_package_json_with_name = function(name) {
   while (currentModule) {
     // Check currentModule has a package.json
     location = currentModule.filename;
+
+    if (typeof location === 'string' && location.indexOf('.js') > 0) {
+      location = location.split('/')
+      location.pop();
+      location = location.join('/');
+    }
+
     var location = find_package_json(location)
     if (!location) {
       currentModule = get_parent_module(currentModule);
@@ -130,4 +137,4 @@ require_optional.exists = function(name) {
   }
 }
 
-module.exports = require_optional;
+module.exports = require_optional;    
