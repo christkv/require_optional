@@ -35,7 +35,8 @@ var find_package_json_with_name = function(name) {
   var found = false;
   while (currentModule) {
     // Check currentModule has a package.json
-    location = currentModule.filename;
+    location = currentModule.filename.split('/');
+    location = location.pop().join('/');
     var location = find_package_json(location)
     if (!location) {
       currentModule = get_parent_module(currentModule);
