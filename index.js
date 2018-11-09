@@ -13,7 +13,7 @@ var find_package_json = function(location) {
   while(!found) {
     if (exists(location + '/package.json')) {
       found = location;
-    } else if (location !== '/') {
+    } else if (location !== '/' && path.dirname(location) != location) {
       location = path.dirname(location);
     } else {
       return false;
